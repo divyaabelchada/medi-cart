@@ -1,23 +1,70 @@
-import logo from './logo.svg';
-import './App.css';
+import { Container, Grid } from "@material-ui/core";
+import "./App.css";
+import Navbar from "./Components/Navbar/Navbar";
+import Banner from "./Components/Banner/Banner";
+import Cards from "./Components/MediCards/Cards";
+import Home from "./Components/Pages/Home";
+//routing
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+  NavLink,
+} from "react-router-dom";
+import { ThemeProvider } from "@material-ui/styles";
+import { createMuiTheme } from "@material-ui/core";
+import AdminLogin from "./Components/AdminLogin/AdminLogin";
+import AlphabetCard from "./Components/AlphabeticSorting/AlphabetCard";
+
+export const colorTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#000",
+    },
+    secondary: {
+      main: "#0000ff",
+    },
+  },
+});
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider theme={colorTheme}>
+        <Router>
+          <div>
+            <Grid
+              container
+              alignItems="center"
+              justify="flex-end"
+              spacing={3}
+              style={{ backgroundColor: "#fafafa" }}
+            >
+              <Grid item>
+                <NavLink to="/admin-login">Admin Login</NavLink>
+              </Grid>
+              <Grid item>About us</Grid>
+              <Grid item>Contact us</Grid>
+            </Grid>
+          </div>
+          <Container>
+            <Navbar />
+          </Container>
+
+          <Switch>
+            <Route path="/medicines-page">
+              <AlphabetCard />
+            </Route>
+            <Route path="/admin-login">
+              <AdminLogin />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </Router>
+      </ThemeProvider>
     </div>
   );
 }
