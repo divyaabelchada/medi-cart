@@ -17,7 +17,7 @@ const tutorialSteps = [
   {
     label: "San Francisco – Oakland Bay Bridge, United States",
     imgPath:
-      "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60",
+      "https://image.freepik.com/free-vector/medical-science-banner-blue-color-shade_1017-24286.jpg",
   },
   {
     label: "Bird",
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     width: "100%",
     overflow: "hidden",
-    maxHeight: 300,
+    maxHeight: 400,
     objectFit: "cover",
   },
   stepper: {
