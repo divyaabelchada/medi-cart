@@ -58,13 +58,13 @@ function Navbar() {
               </NavLink>
             </Grid>
             <Grid item>
-              <NavLink to="/Cart" activeClassName="selected">
+              <NavLink to="/cart" activeClassName="selected">
                 <h3>Cart</h3>
               </NavLink>
             </Grid>
 
             <Grid item>
-              <NavLink to="/user-profile" activeClassName="selected">
+              <NavLink to="/profile" activeClassName="selected">
                 <h3>Profile</h3>
               </NavLink>
             </Grid>

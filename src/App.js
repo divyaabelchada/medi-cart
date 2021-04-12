@@ -43,7 +43,7 @@ function App() {
               style={{ backgroundColor: "#fafafa" }}
             >
               <Grid item>
-                <NavLink to="/admin-login">Admin Login</NavLink>
+                <NavLink to="/admin-login">Vendor Login</NavLink>
               </Grid>
               <Grid item>About us</Grid>
               <Grid item>Contact us</Grid>
@@ -54,6 +54,12 @@ function App() {
           </Container>
 
           <Switch>
+            <Route path="/profile">
+              <div></div>
+            </Route>
+            <Route path="/cart">
+              <div></div>
+            </Route>
             <Route path="/medicines-page">
               <AlphabetCard />
             </Route>
