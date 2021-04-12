@@ -5,9 +5,12 @@ import ProductCard from "./ProductCard";
 function AlphabetCard() {
   return (
     <div>
-      <h2> &nbsp; &nbsp;A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</h2>
       <Container>
-        <Grid container alignItems="center" spacing={2}>
+        <h2 style={{ letterSpacing: "1rem", cursor: "pointer" }}>
+          {" "}
+          A B C D E F G H I J K L M N O P Q R ....
+        </h2>
+        <Grid container alignItems="center" spacing={2} justify="center">
           <Grid item>
             <ProductCard />
           </Grid>

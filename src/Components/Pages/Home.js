@@ -11,28 +11,28 @@ function Home() {
       <Container>
         <Grid container alignItems="center" spacing={2}>
           <Grid item xs={6} md={3}>
-            <Cards />
+            <Cards title="Diabetes Care" />
           </Grid>
           <Grid item xs={6} md={3}>
-            <Cards />
+            <Cards title="Cardiac Care" />
           </Grid>
           <Grid item xs={6} md={3}>
-            <Cards />
+            <Cards title="Skin Care" />
           </Grid>
           <Grid item xs={6} md={3}>
-            <Cards />
+            <Cards title="Hair Care" />
           </Grid>
           <Grid item xs={6} md={3}>
-            <Cards />
+            <Cards title="Stomach Care" />
           </Grid>
           <Grid item xs={6} md={3}>
-            <Cards />
+            <Cards title="Ortho Care" />
           </Grid>
           <Grid item xs={6} md={3}>
-            <Cards />
+            <Cards title="Cardiac Care" />
           </Grid>
           <Grid item xs={6} md={3}>
-            <Cards />
+            <Cards title="Cardiac Care" />
           </Grid>
         </Grid>
       </Container>

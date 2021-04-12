@@ -15,6 +15,7 @@ import {
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from "@material-ui/core";
 import AdminLogin from "./Components/AdminLogin/AdminLogin";
+import AdminSignUp from "./Components/AdminLogin/AdminSignUp";
 import AlphabetCard from "./Components/AlphabeticSorting/AlphabetCard";
 
 export const colorTheme = createMuiTheme({
@@ -55,6 +56,9 @@ function App() {
           <Switch>
             <Route path="/medicines-page">
               <AlphabetCard />
+            </Route>
+            <Route path="/admin-signup">
+              <AdminSignUp />
             </Route>
             <Route path="/admin-login">
               <AdminLogin />
