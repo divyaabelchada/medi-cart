@@ -17,22 +17,22 @@ const tutorialSteps = [
   {
     label: "San Francisco – Oakland Bay Bridge, United States",
     imgPath:
-      "https://image.freepik.com/free-vector/medical-science-banner-blue-color-shade_1017-24286.jpg",
+      "https://ispe.org/sites/default/files/styles/hero_banner_large/public/2019-03/cover1900px650_0.jpg?itok=l2ZWC_15",
   },
   {
     label: "Bird",
     imgPath:
-      "https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60",
+      "https://image.freepik.com/free-vector/throat-lozenge-lemon-cough-drops-banner_33099-2184.jpg",
   },
   {
     label: "Bali, Indonesia",
     imgPath:
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80",
+      "https://image.freepik.com/free-vector/medical-science-banner-blue-color-shade_1017-24286.jpg",
   },
   {
     label: "NeONBRAND Digital Marketing, Las Vegas, United States",
     imgPath:
-      "https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=400&h=250&q=60",
+      "https://image.freepik.com/free-vector/health-care-science-medical-dna-background-banner_1017-20043.jpg",
   },
   {
     label: "Goč, Serbia",
