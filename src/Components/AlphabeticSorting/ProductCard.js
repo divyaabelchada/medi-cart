@@ -12,31 +12,53 @@ import Skeleton from "@material-ui/lab/Skeleton";
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    height: 400,
   },
 });
 
-export default function ImgMediaCard() {
+export default function ImgMediaCard({
+  id,
+  category,
+  description,
+  discount,
+  imageUrl,
+  price,
+  productName,
+}) {
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        <Skeleton variant="rect" widht={"100%"} height={200} />
+        {/*  <Skeleton variant="rect" widht={"100%"} height={200} /> */}
+        <img
+          src={imageUrl}
+          style={{
+            height: 200,
+            width: "90%",
+            objectFit: "contain",
+            paddingTop: "1rem",
+          }}
+        />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Curcumin 30 Tablets
+          <Typography
+            gutterBottom
+            variant="h6"
+            component="h3"
+            style={{ height: 70 }}
+          >
+            {productName} - Rs {price}/-
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Ideal for cardiovascular health and dermatological disorders. Used
-            as an immunity booster.
+            {description}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button fullWidth size="small" color="primary" variant="outlined">
           Add to cart
         </Button>
-        <Button size="small" color="primary" variant="contained">
+        <Button fullWidth size="small" color="primary" variant="contained">
           Buy now
         </Button>
       </CardActions>

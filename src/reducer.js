@@ -2,6 +2,7 @@ export const initialState = {
   user: null,
   adminData: { value: false, data: null },
   userData: null,
+  products: { value: false, error: false, errorMSg: "", data: null },
   cart: { value: false, error: false, errorMSg: "", data: null },
 };
 
@@ -9,6 +10,8 @@ export const actionTypes = {
   SET_USER: "SET_USER",
   SET_USER_DETAILS: "USER_DETAILS",
   SET_ADMIN_DETAILS: "ADMIN_DETAILS",
+  SET_PRODUCTS: "ADMIN_PRODUCTS",
+  SET_CART: "ADMIN_CART",
 };
 
 const reducer = (state, action) => {
@@ -29,7 +32,11 @@ const reducer = (state, action) => {
         ...state,
         userData: action.userData,
       };
-
+    case actionTypes.SET_PRODUCTS:
+      return {
+        ...state,
+        products: action.products,
+      };
     default:
       return state;
   }
