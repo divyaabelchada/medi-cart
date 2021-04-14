@@ -27,17 +27,17 @@ const tutorialSteps = [
   {
     label: "Bali, Indonesia",
     imgPath:
-      "https://image.freepik.com/free-vector/medical-science-banner-blue-color-shade_1017-24286.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ78IyWR2tfy1sncJ_vxhM5_STzkiC27WDvmYFz5hPBSQ_3RFmWXMWZdvTU1p6A05tayA&usqp=CAU",
   },
   {
     label: "NeONBRAND Digital Marketing, Las Vegas, United States",
     imgPath:
-      "https://image.freepik.com/free-vector/health-care-science-medical-dna-background-banner_1017-20043.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd0Kwl5CvukTLp5hI7Vmvhti2B8hUhfYAQZg&usqp=CAU",
   },
   {
     label: "Goč, Serbia",
     imgPath:
-      "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
+      "https://sciexaminer.com/wp-content/uploads/2020/07/Healthcare_banner-1.jpg",
   },
 ];
 

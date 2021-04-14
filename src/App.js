@@ -17,6 +17,8 @@ import { createMuiTheme } from "@material-ui/core";
 import AdminLogin from "./Components/AdminLogin/AdminLogin";
 import AdminSignUp from "./Components/AdminLogin/AdminSignUp";
 import AlphabetCard from "./Components/AlphabeticSorting/AlphabetCard";
+import Footer from "./Footer";
+import ImageUpload from "./Components/AdminSection/ImageUpload";
 
 export const colorTheme = createMuiTheme({
   palette: {
@@ -71,8 +73,10 @@ function App() {
             </Route>
             <Route path="/">
               <Home />
+              <ImageUpload />
             </Route>
           </Switch>
+          <Footer />
         </Router>
       </ThemeProvider>
     </div>
