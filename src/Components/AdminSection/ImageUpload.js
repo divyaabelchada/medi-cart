@@ -109,73 +109,75 @@ function ImageUpload() {
   };
 
   return (
-    <Card className={classes.root}>
-      <CardContent>
-        <Typography variant="h5" style={{ textAlign: "center" }}>
-          Upload product
-        </Typography>
-      </CardContent>
-      <Container className={classes.form}>
-        <form className={classes.form}>
-          <progress
-            style={{ width: "100%", height: 30 }}
-            value={progress}
-            max="100"
-          />
-          <TextField
-            style={{ width: "100%" }}
-            id="standard-basic"
-            label="Enter product details"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <TextField
-            style={{ width: "100%" }}
-            id="standard-basic"
-            label="Enter product name"
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
-          />{" "}
-          <TextField
-            style={{ width: "100%" }}
-            id="standard-basic"
-            label="Enter product price"
-            value={productPrice}
-            onChange={(e) => setProductPrice(e.target.value)}
-          />{" "}
-          <TextField
-            style={{ width: "100%" }}
-            id="standard-basic"
-            label="discount"
-            value={discount}
-            onChange={(e) => setDiscount(e.target.value)}
-          />
-          <TextField
-            style={{ width: "100%" }}
-            id="standard-basic"
-            label="Category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          />
-          <br></br>
-          <input
-            style={{ marginTop: 20 }}
-            type="file"
-            onChange={handleChange}
-          />
-          <br></br>
-          <Button
-            style={{ marginTop: 20 }}
-            onClick={handleUpload}
-            variant="contained"
-            color="primary"
-            disableElevation
-          >
-            Upload
-          </Button>
-        </form>
-      </Container>
-    </Card>
+    <Container maxWidth="sm">
+      <Card className={classes.root}>
+        <CardContent>
+          <Typography variant="h5" style={{ textAlign: "center" }}>
+            Upload product
+          </Typography>
+        </CardContent>
+        <Container className={classes.form}>
+          <form className={classes.form}>
+            <progress
+              style={{ width: "100%", height: 30 }}
+              value={progress}
+              max="100"
+            />
+            <TextField
+              style={{ width: "100%" }}
+              id="standard-basic"
+              label="Enter product details"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <TextField
+              style={{ width: "100%" }}
+              id="standard-basic"
+              label="Enter product name"
+              value={productName}
+              onChange={(e) => setProductName(e.target.value)}
+            />{" "}
+            <TextField
+              style={{ width: "100%" }}
+              id="standard-basic"
+              label="Enter product price"
+              value={productPrice}
+              onChange={(e) => setProductPrice(e.target.value)}
+            />{" "}
+            <TextField
+              style={{ width: "100%" }}
+              id="standard-basic"
+              label="discount"
+              value={discount}
+              onChange={(e) => setDiscount(e.target.value)}
+            />
+            <TextField
+              style={{ width: "100%" }}
+              id="standard-basic"
+              label="Category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            />
+            <br></br>
+            <input
+              style={{ marginTop: 20 }}
+              type="file"
+              onChange={handleChange}
+            />
+            <br></br>
+            <Button
+              style={{ marginTop: 20 }}
+              onClick={handleUpload}
+              variant="contained"
+              color="primary"
+              disableElevation
+            >
+              Upload
+            </Button>
+          </form>
+        </Container>
+      </Card>
+    </Container>
   );
 }
 

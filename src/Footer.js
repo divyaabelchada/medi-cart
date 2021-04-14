@@ -50,7 +50,7 @@ function Footer() {
             </h1>
             <h3 style={{ color: "#a1a1a1" }}>
               {" "}
-              © 2020 Copyright: Naveen Bhambani{" "}
+              © 2020 Copyright: Naveen Bambani{" "}
             </h3>
           </Grid>
         </Grid>
