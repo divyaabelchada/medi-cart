@@ -17,6 +17,11 @@ import { createMuiTheme } from "@material-ui/core";
 import AdminLogin from "./Components/AdminLogin/AdminLogin";
 import AdminSignUp from "./Components/AdminLogin/AdminSignUp";
 import AlphabetCard from "./Components/AlphabeticSorting/AlphabetCard";
+import Footer from "./Footer";
+import ImageUpload from "./Components/AdminSection/ImageUpload";
+import { db, auth, provider } from "./firebase";
+import { actionTypes } from "./reducer";
+import { useStateValue } from "./StateProvider";
 
 export const colorTheme = createMuiTheme({
   palette: {
@@ -30,6 +35,8 @@ export const colorTheme = createMuiTheme({
 });
 
 function App() {
+  const [{ user }, dispatch] = useStateValue();
+
   return (
     <div className="App">
       <ThemeProvider theme={colorTheme}>
@@ -40,7 +47,11 @@ function App() {
               alignItems="center"
               justify="flex-end"
               spacing={3}
-              style={{ backgroundColor: "#fafafa" }}
+              style={{
+                backgroundColor: "#fafafa",
+                width: "100%",
+                overflowX: "hidden",
+              }}
             >
               <Grid item>
                 <NavLink to="/admin-login">Vendor Login</NavLink>
@@ -71,8 +82,10 @@ function App() {
             </Route>
             <Route path="/">
               <Home />
+              <ImageUpload />
             </Route>
           </Switch>
+          <Footer />
         </Router>
       </ThemeProvider>
     </div>

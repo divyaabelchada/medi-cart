@@ -17,7 +17,12 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
 import { Link, NavLink } from "react-router-dom";
 
+import { actionTypes } from "../../reducer";
+import { useStateValue } from "../../StateProvider";
+
 function Navbar() {
+  const [{ user }, dispatch] = useStateValue();
+
   return (
     <div id="navbar">
       <Grid container alignItems="center" justify="flex-start">
