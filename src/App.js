@@ -82,7 +82,6 @@ function App() {
             </Route>
             <Route path="/">
               <Home />
-              <ImageUpload />
             </Route>
           </Switch>
           <Footer />
