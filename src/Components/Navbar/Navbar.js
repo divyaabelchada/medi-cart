@@ -2,13 +2,15 @@ import {
   Avatar,
   Container,
   Grid,
+  InputBase,
   IconButton,
   ListItem,
+  Typography,
 } from "@material-ui/core";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import { Person, Search } from "@material-ui/icons";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import clsx from "clsx";
 
@@ -17,11 +19,37 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
 import { Link, NavLink } from "react-router-dom";
 
+import { db, auth, provider } from "../../firebase";
+
 import { actionTypes } from "../../reducer";
 import { useStateValue } from "../../StateProvider";
 
+import Autocomplete from "@material-ui/lab/Autocomplete";
+
 function Navbar() {
   const [{ user }, dispatch] = useStateValue();
+
+  const [products, setProducts] = useState([]);
+  const [value, setValue] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  /* setting up produccts */
+
+  useEffect(() => {
+    db.collection("products")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        setProducts(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            product: doc.data(),
+          }))
+        );
+      });
+    setLoading(false);
+  }, []);
+  /* end products */
+  console.log(products);
 
   return (
     <div id="navbar">
