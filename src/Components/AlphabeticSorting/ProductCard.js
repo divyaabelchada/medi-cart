@@ -12,7 +12,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
-    height: 400,
+    height: 440,
   },
 });
 
@@ -49,7 +49,12 @@ export default function ImgMediaCard({
           >
             {productName} - Rs {price}/-
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+            style={{ height: 60 }}
+          >
             {description}
           </Typography>
         </CardContent>

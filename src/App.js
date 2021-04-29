@@ -22,6 +22,7 @@ import ImageUpload from "./Components/AdminSection/ImageUpload";
 import { db, auth, provider } from "./firebase";
 import { actionTypes } from "./reducer";
 import { useStateValue } from "./StateProvider";
+import Cart from "./Components/Pages/Cart";
 
 export const colorTheme = createMuiTheme({
   palette: {
@@ -65,11 +66,14 @@ function App() {
           </Container>
 
           <Switch>
+            <Route path="/login">
+              {!user ? <AdminLogin /> : <div>Profile</div>}
+            </Route>
             <Route path="/profile">
-              <div></div>
+              {!user ? <AdminLogin /> : <div>Profile</div>}
             </Route>
             <Route path="/cart">
-              <div></div>
+              <Cart />
             </Route>
             <Route path="/medicines-page">
               <AlphabetCard />

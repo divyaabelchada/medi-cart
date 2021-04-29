@@ -29,6 +29,7 @@ function AlphabetCard() {
 
   return (
     <div style={{ backgroundColor: "#fafafa" }}>
+      <br />
       <h2 style={{ textAlign: "center" }}> Explore our products</h2>
       <Container style={{ marginTop: "3rem" }}>
         {/* <h2 style={{ letterSpacing: "1rem", cursor: "pointer" }}>

@@ -11,3 +11,10 @@
   text-decoration: none;
   color: inherit;
 }
+
+.paper {
+  padding: 1rem;
+}
+.product-name:hover {
+  color: rgb(184, 74, 2);
+}

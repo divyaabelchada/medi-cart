@@ -32,6 +32,7 @@ function Navbar() {
   const [products, setProducts] = useState([]);
   const [value, setValue] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [present, setPresent] = useState(null);
 
   /* setting up produccts */
 
@@ -50,6 +51,16 @@ function Navbar() {
   }, []);
   /* end products */
   console.log(products);
+
+  //var fruits = ["Banana", "Orange", "Apple", "Mango"];
+  //var n = fruits.includes("Banana", 0);
+
+  const searchProduct = (e) => {
+    setPresent(products.includes(value, 0));
+    if (present) {
+      alert("present");
+    }
+  };
 
   return (
     <div id="navbar">
@@ -70,12 +81,14 @@ function Navbar() {
             placeholder="Search for medicines"
             id="search"
             fullWidth
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
                   {" "}
                   <IconButton>
-                    <Search />{" "}
+                    <Search onClick={searchProduct} />
                   </IconButton>
                 </InputAdornment>
               ),
@@ -97,9 +110,15 @@ function Navbar() {
             </Grid>
 
             <Grid item>
-              <NavLink to="/profile" activeClassName="selected">
-                <h3>Profile</h3>
-              </NavLink>
+              {!user ? (
+                <NavLink to="/login" activeClassName="selected">
+                  <h3>Login</h3>
+                </NavLink>
+              ) : (
+                <NavLink to="/profile" activeClassName="selected">
+                  <h3>Profile</h3>
+                </NavLink>
+              )}
             </Grid>
           </Grid>
         </Grid>
