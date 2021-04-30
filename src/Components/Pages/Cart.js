@@ -35,19 +35,28 @@ function Cart() {
 
   /* setting up produccts */
 
+  const [login, setLogin] = useState(user ? false : true);
+
   useEffect(() => {
-    db.collection("products")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) => {
-        setProducts(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            product: doc.data(),
-          }))
-        );
-        setPrices(snapshot.docs.map((doc) => Number(doc.data().price)));
-      });
-    setLoading(false);
+    if (user) {
+      db.collection("users")
+        .doc(user.uid)
+        .collection("cart")
+        .orderBy("timestamp", "desc")
+        .onSnapshot((snapshot) => {
+          setProducts(
+            snapshot.docs.map((doc) => ({
+              id: doc.id,
+              product: doc.data(),
+            }))
+          );
+          setPrices(snapshot.docs.map((doc) => Number(doc.data().price)));
+        });
+      setLoading(false);
+      setLogin(false);
+    } else {
+      setLogin(true);
+    }
   }, []);
   /* end products */
 
@@ -82,7 +91,9 @@ function Cart() {
 
   const confirmOrder = () => {
     if (user) {
-      db.collection("orders")
+      db.collection("users")
+        .doc(user.uid)
+        .collection("orders")
         .add({
           userId: user.uid,
           products: products,
@@ -113,40 +124,49 @@ function Cart() {
               style={{ backgroundColor: "#fff" }}
             >
               <h2>Shopping Cart</h2> <hr />
-              {products.map(({ id, product }) => (
+              {login ? (
+                <div></div>
+              ) : (
                 <div>
-                  <Grid container alignItems="flex-start" spacing={1}>
-                    <Grid item xs={2}>
-                      <Link to={`/product/${id}`} className="product-name">
-                        <img
-                          src={product.imageUrl}
-                          style={{
-                            width: "100%",
-                            maxHeight: "6rem",
-                            objectFit: "contain",
-                          }}
-                        />
-                      </Link>
-                    </Grid>
-                    <Grid item xs={7}>
-                      <p style={{ margin: 0 }}>
-                        <Link to={`/product/${id}`} className="product-name">
-                          <big>{product.productName}</big> <br />{" "}
-                        </Link>
-                        <small> {product.description} </small>
-                      </p>
-                      <p>Qty: {1}</p>
-                    </Grid>
-                    <Grid item xs={2}>
-                      <p>
-                        <b>₹ {product.price} </b>
-                      </p>
-                    </Grid>
-                  </Grid>
-                  <br />
-                  <hr style={{ borderTop: "1px solid #f7f7f7" }} />
+                  {products.map(({ id, product }) => (
+                    <div>
+                      <Grid container alignItems="flex-start" spacing={1}>
+                        <Grid item xs={2}>
+                          <Link to={`/product/${id}`} className="product-name">
+                            <img
+                              src={product.imageUrl}
+                              style={{
+                                width: "100%",
+                                maxHeight: "6rem",
+                                objectFit: "contain",
+                              }}
+                            />
+                          </Link>
+                        </Grid>
+                        <Grid item xs={7}>
+                          <p style={{ margin: 0 }}>
+                            <Link
+                              to={`/product/${id}`}
+                              className="product-name"
+                            >
+                              <big>{product.productName}</big> <br />{" "}
+                            </Link>
+                            <small> {product.description} </small>
+                          </p>
+                          <p>Qty: {1}</p>
+                        </Grid>
+                        <Grid item xs={2}>
+                          <p>
+                            <b>₹ {product.price} </b>
+                          </p>
+                        </Grid>
+                      </Grid>
+                      <br />
+                      <hr style={{ borderTop: "1px solid #f7f7f7" }} />
+                    </div>
+                  ))}
                 </div>
-              ))}
+              )}{" "}
             </Paper>
           </Grid>
           <Grid item xs={4}>
@@ -297,11 +317,14 @@ function Cart() {
                   </Grid>
                 </Grid>
               ) : (
-                <Grid container alignItems="flex-start" justify="space-between">
-                  <Grid item xs={12}>
+                <Grid container alignItems="flex-start" justify="center">
+                  <Grid item xs={5}>
                     <img
                       src="https://lh3.googleusercontent.com/proxy/RhKmxLzEfBNPCvc0RdK9tZ8lFaNqfJWEo71lJCo3sBXQXyF0Y60QmRmaY6X1fYpG1AwzYVIsCM20YUouc9Jed0nBypjaRxDbPyHakuSiY0vPehPju-AJ-y2w7SCyL1ycLw"
-                      style={{ objectFit: "contain", height: "4rem" }}
+                      style={{
+                        objectFit: "contain",
+                        width: "100%",
+                      }}
                     />
                   </Grid>
                   <Grid

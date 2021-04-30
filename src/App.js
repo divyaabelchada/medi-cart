@@ -23,6 +23,7 @@ import { db, auth, provider } from "./firebase";
 import { actionTypes } from "./reducer";
 import { useStateValue } from "./StateProvider";
 import Cart from "./Components/Pages/Cart";
+import CategoryProducts from "./Components/AlphabeticSorting/CategoryProducts";
 
 export const colorTheme = createMuiTheme({
   palette: {
@@ -74,6 +75,9 @@ function App() {
             </Route>
             <Route path="/cart">
               <Cart />
+            </Route>
+            <Route path="/medicines-page/:category">
+              <CategoryProducts />
             </Route>
             <Route path="/medicines-page">
               <AlphabetCard />
