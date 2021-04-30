@@ -91,9 +91,7 @@ function Cart() {
 
   const confirmOrder = () => {
     if (user) {
-      db.collection("users")
-        .doc(user.uid)
-        .collection("orders")
+      db.collection("orders")
         .add({
           userId: user.uid,
           products: products,
@@ -101,7 +99,27 @@ function Cart() {
           address: formData,
         })
         .then(() => {
-          setStep(3);
+          db.collection("users")
+            .doc(user.uid)
+            .collection("orders")
+            .add({})
+            .then(() => {
+              setStep(3);
+              setProducts([]);
+              db.collection("users")
+                .doc(user.uid)
+                .collection("cart")
+                .delete()
+                .then(() => {
+                  console.log("Document successfully deleted!");
+                })
+                .catch((error) => {
+                  console.error("Error removing document: ", error);
+                });
+            })
+            .catch((error) => {
+              setAlert({ value: false, msg: error });
+            });
         })
         .catch((error) => {
           setAlert({ value: false, msg: error });
@@ -125,7 +143,17 @@ function Cart() {
             >
               <h2>Shopping Cart</h2> <hr />
               {login ? (
-                <div></div>
+                <div>
+                  Please login to continue <br />
+                  <br />
+                  <Link to="/login">
+                    <Button variant="contained" color="primary">
+                      Login
+                    </Button>
+                  </Link>
+                </div>
+              ) : products.length < 0 ? (
+                <div>Your cart is empty</div>
               ) : (
                 <div>
                   {products.map(({ id, product }) => (
@@ -332,15 +360,11 @@ function Cart() {
                     xs={12}
                     style={{ marginTop: "0.5rem", textAlign: "center" }}
                   >
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => {
-                        checkout();
-                      }}
-                    >
-                      Proceed to checkout
-                    </Button>
+                    <Link to="/profile">
+                      <Button variant="contained" color="primary">
+                        Check order Details
+                      </Button>
+                    </Link>
                   </Grid>
                 </Grid>
               )}
