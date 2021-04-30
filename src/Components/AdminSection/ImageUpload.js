@@ -77,49 +77,56 @@ function ImageUpload() {
     }
   };
 
+  console.log(user);
+
   const handleUpload = () => {
-    const uploadTask = storage.ref(`images/${image.name}`).put(image);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        //progress logic.
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(progress);
-      },
-      (error) => {
-        console.log(error);
-        alert(error.message);
-      },
-      () => {
-        //complete function
-        storage
-          .ref("images")
-          .child(image.name)
-          .getDownloadURL()
-          .then((url) => {
-            const res = db
-              .collection("products")
-              .add({
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                description: description,
-                imageUrl: url,
-                productName: productName,
-                price: productPrice,
-                category: category,
-              })
-              .catch((error) => alert(error.message));
-            //post image inside db
-            setProgress(0);
-            setImage(null);
-            setDescription("");
-            setProductName("");
-            setProductPrice("");
-            setCategory("");
-          });
-      }
-    );
+    if (user) {
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          //progress logic.
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progress);
+        },
+        (error) => {
+          console.log(error);
+          alert(error.message);
+        },
+        () => {
+          //complete function
+          storage
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then((url) => {
+              const res = db
+                .collection("products")
+                .add({
+                  timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                  description: description,
+                  imageUrl: url,
+                  productName: productName,
+                  price: productPrice,
+                  category: category,
+                  seller: user.uid,
+                })
+                .catch((error) => alert(error.message));
+              //post image inside db
+              setProgress(0);
+              setImage(null);
+              setDescription("");
+              setProductName("");
+              setProductPrice("");
+              setCategory("");
+            });
+        }
+      );
+    } else {
+      alert("Please login to continue");
+    }
   };
 
   return (
