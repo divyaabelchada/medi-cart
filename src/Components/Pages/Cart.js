@@ -109,6 +109,7 @@ function Cart() {
               db.collection("users")
                 .doc(user.uid)
                 .collection("cart")
+                .doc("cart")
                 .delete()
                 .then(() => {
                   console.log("Document successfully deleted!");
