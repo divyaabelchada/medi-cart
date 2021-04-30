@@ -2,13 +2,15 @@ import {
   Avatar,
   Container,
   Grid,
+  InputBase,
   IconButton,
   ListItem,
+  Typography,
 } from "@material-ui/core";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import { Person, Search } from "@material-ui/icons";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import clsx from "clsx";
 
@@ -17,11 +19,48 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
 import { Link, NavLink } from "react-router-dom";
 
+import { db, auth, provider } from "../../firebase";
+
 import { actionTypes } from "../../reducer";
 import { useStateValue } from "../../StateProvider";
 
+import Autocomplete from "@material-ui/lab/Autocomplete";
+
 function Navbar() {
   const [{ user }, dispatch] = useStateValue();
+
+  const [products, setProducts] = useState([]);
+  const [value, setValue] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [present, setPresent] = useState(null);
+
+  /* setting up produccts */
+
+  useEffect(() => {
+    db.collection("products")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        setProducts(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            product: doc.data(),
+          }))
+        );
+      });
+    setLoading(false);
+  }, []);
+  /* end products */
+  console.log(products);
+
+  //var fruits = ["Banana", "Orange", "Apple", "Mango"];
+  //var n = fruits.includes("Banana", 0);
+
+  const searchProduct = (e) => {
+    setPresent(products.includes(value, 0));
+    if (present) {
+      alert("present");
+    }
+  };
 
   return (
     <div id="navbar">
@@ -42,12 +81,14 @@ function Navbar() {
             placeholder="Search for medicines"
             id="search"
             fullWidth
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
                   {" "}
                   <IconButton>
-                    <Search />{" "}
+                    <Search onClick={searchProduct} />
                   </IconButton>
                 </InputAdornment>
               ),
@@ -69,9 +110,15 @@ function Navbar() {
             </Grid>
 
             <Grid item>
-              <NavLink to="/profile" activeClassName="selected">
-                <h3>Profile</h3>
-              </NavLink>
+              {!user ? (
+                <NavLink to="/login" activeClassName="selected">
+                  <h3>Login</h3>
+                </NavLink>
+              ) : (
+                <NavLink to="/profile" activeClassName="selected">
+                  <h3>Profile</h3>
+                </NavLink>
+              )}
             </Grid>
           </Grid>
         </Grid>

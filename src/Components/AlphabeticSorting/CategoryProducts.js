@@ -4,10 +4,13 @@ import ProductCard from "./ProductCard";
 import { db, auth, provider } from "../../firebase";
 import { actionTypes } from "../../reducer";
 import { useStateValue } from "../../StateProvider";
+import { useParams } from "react-router-dom";
 
-function AlphabetCard() {
+function CategoryProducts() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const { category } = useParams();
 
   /* setting up produccts */
 
@@ -56,4 +59,4 @@ function AlphabetCard() {
   );
 }
 
-export default AlphabetCard;
+export default CategoryProducts;

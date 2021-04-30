@@ -110,7 +110,7 @@ export default function AdminLogin() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Vendor Sign in
+              Sign in
             </Typography>
             <form className={classes.form} noValidate>
               <TextField
@@ -139,10 +139,7 @@ export default function AdminLogin() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
+
               <Button
                 type="submit"
                 fullWidth

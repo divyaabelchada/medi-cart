@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     overflow: "hidden",
     maxHeight: 400,
-    objectFit: "cover",
+    objectFit: "contain",
   },
   stepper: {
     width: "100%",

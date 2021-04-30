@@ -14,6 +14,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { Alert } from "@material-ui/lab";
 import { actionTypes } from "../../reducer";
 import { useStateValue } from "../../StateProvider";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 
 function Copyright() {
   return (
@@ -57,6 +59,8 @@ export default function SignUp() {
   const history = useHistory();
   const [{ user, adminData }, dispatch] = useStateValue();
 
+  const [admin, setAdmin] = useState(false);
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -99,7 +103,7 @@ export default function SignUp() {
             fName: fName,
             contact: contact,
             aadhar: aadhar,
-            userType: "admin",
+            admin: admin,
           },
         },
       });
@@ -177,20 +181,24 @@ export default function SignUp() {
                       onChange={(e) => setContact(e.target.value)}
                     />
                   </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      autoComplete="aadhar"
-                      name="firstName"
-                      variant="outlined"
-                      required
-                      fullWidth
-                      id="firstName"
-                      label="Aadhar number"
-                      value={aadhar}
-                      onChange={(e) => setAadhar(e.target.value)}
-                      autoFocus
-                    />
-                  </Grid>
+                  {admin ? (
+                    <Grid item xs={12}>
+                      <TextField
+                        autoComplete="aadhar"
+                        name="firstName"
+                        variant="outlined"
+                        required
+                        fullWidth
+                        id="firstName"
+                        label="Aadhar number"
+                        value={aadhar}
+                        onChange={(e) => setAadhar(e.target.value)}
+                        autoFocus
+                      />
+                    </Grid>
+                  ) : (
+                    <></>
+                  )}
                 </Grid>
                 <Button
                   type="submit"
@@ -213,7 +221,7 @@ export default function SignUp() {
           ) : (
             <div className={classes.paper}>
               <Typography component="h1" variant="h5">
-                Register as vendor
+                Register
               </Typography>
               <form className={classes.form} noValidate>
                 <Grid container spacing={2}>
@@ -245,6 +253,17 @@ export default function SignUp() {
                     />
                   </Grid>
                 </Grid>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      value="admin"
+                      checked={admin}
+                      onChange={(e) => setAdmin(!admin)}
+                      color="primary"
+                    />
+                  }
+                  label="Register as Admin"
+                />
                 <Button
                   type="submit"
                   fullWidth
