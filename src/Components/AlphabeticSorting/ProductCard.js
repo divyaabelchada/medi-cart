@@ -41,7 +41,6 @@ export default function ImgMediaCard({
       db.collection("users")
         .doc(user.uid)
         .collection("cart")
-        .doc("cart")
         .add({
           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
           description: description,

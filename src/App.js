@@ -24,6 +24,7 @@ import { actionTypes } from "./reducer";
 import { useStateValue } from "./StateProvider";
 import Cart from "./Components/Pages/Cart";
 import CategoryProducts from "./Components/AlphabeticSorting/CategoryProducts";
+import Profile from "./Components/Pages/Profile";
 
 export const colorTheme = createMuiTheme({
   palette: {
@@ -68,10 +69,22 @@ function App() {
 
           <Switch>
             <Route path="/login">
-              {!user ? <AdminLogin /> : <div>Profile</div>}
+              {!user ? (
+                <AdminLogin />
+              ) : (
+                <div>
+                  <Profile />
+                </div>
+              )}
             </Route>
             <Route path="/profile">
-              {!user ? <AdminLogin /> : <div>Profile</div>}
+              {!user ? (
+                <AdminLogin />
+              ) : (
+                <div>
+                  <Profile />
+                </div>
+              )}
             </Route>
             <Route path="/cart">
               <Cart />

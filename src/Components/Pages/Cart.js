@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { db, auth, provider } from "../../firebase";
 import { actionTypes } from "../../reducer";
 import { useStateValue } from "../../StateProvider";
+import firebase from "firebase";
 
 function Cart() {
   const [{ user }, dispatch] = useStateValue();
@@ -93,6 +94,7 @@ function Cart() {
     if (user) {
       db.collection("orders")
         .add({
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
           userId: user.uid,
           products: products,
           amount: total,
@@ -102,21 +104,15 @@ function Cart() {
           db.collection("users")
             .doc(user.uid)
             .collection("orders")
-            .add({})
+            .add({
+              products: products,
+              amount: total,
+              address: formData,
+              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            })
             .then(() => {
               setStep(3);
               setProducts([]);
-              db.collection("users")
-                .doc(user.uid)
-                .collection("cart")
-                .doc("cart")
-                .delete()
-                .then(() => {
-                  console.log("Document successfully deleted!");
-                })
-                .catch((error) => {
-                  console.error("Error removing document: ", error);
-                });
             })
             .catch((error) => {
               setAlert({ value: false, msg: error });
