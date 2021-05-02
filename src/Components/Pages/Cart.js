@@ -135,7 +135,7 @@ function Cart() {
     }
   };
 
-  const deleteItem = (doc) => {
+  const deleteItem = (doc, price) => {
     if (user) {
       db.collection("users")
         .doc(user.uid)
@@ -143,6 +143,7 @@ function Cart() {
         .doc(doc)
         .delete()
         .then(() => {
+          setTotal(total - Number(price));
           alert("item deleted");
         })
         .catch((error) => {
@@ -213,7 +214,9 @@ function Cart() {
                           </p>
                         </Grid>
                         <Grid item xs={1}>
-                          <IconButton onClick={() => deleteItem(id)}>
+                          <IconButton
+                            onClick={() => deleteItem(id, product.price)}
+                          >
                             <Delete />
                           </IconButton>
                         </Grid>
@@ -223,7 +226,7 @@ function Cart() {
                     </div>
                   ))}
                 </div>
-              )}{" "}
+              )}
             </Paper>
           </Grid>
           <Grid item xs={4}>
