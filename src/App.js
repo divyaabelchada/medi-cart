@@ -25,6 +25,8 @@ import { useStateValue } from "./StateProvider";
 import Cart from "./Components/Pages/Cart";
 import CategoryProducts from "./Components/AlphabeticSorting/CategoryProducts";
 import Profile from "./Components/Pages/Profile";
+import UserLogin from "./Components/UserLogin/UserLogin";
+import UserSignUp from "./Components/UserLogin/UserSignUp";
 
 export const colorTheme = createMuiTheme({
   palette: {
@@ -38,7 +40,7 @@ export const colorTheme = createMuiTheme({
 });
 
 function App() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, admin }, dispatch] = useStateValue();
 
   return (
     <div className="App">
@@ -57,7 +59,10 @@ function App() {
               }}
             >
               <Grid item>
-                <NavLink to="/admin-login">Vendor Login</NavLink>
+                <NavLink to="/admin-login">
+                  {" "}
+                  {!admin ? <p> Vendor Login</p> : <p> AdminDashboard </p>}{" "}
+                </NavLink>
               </Grid>
               <Grid item>About us</Grid>
               <Grid item>Contact us</Grid>
@@ -68,9 +73,9 @@ function App() {
           </Container>
 
           <Switch>
-            <Route path="/login">
+            <Route path="/user-login">
               {!user ? (
-                <AdminLogin />
+                <UserLogin />
               ) : (
                 <div>
                   <Profile />
@@ -94,6 +99,12 @@ function App() {
             </Route>
             <Route path="/medicines-page">
               <AlphabetCard />
+            </Route>
+            <Route path="/user-signup">
+              <UserSignUp />
+            </Route>
+            <Route path="/user-login">
+              <UserLogin />
             </Route>
             <Route path="/admin-signup">
               <AdminSignUp />

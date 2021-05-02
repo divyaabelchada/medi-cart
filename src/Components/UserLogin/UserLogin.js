@@ -24,7 +24,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" to="/">
-        Naveen Bambhani
+        Naveen Bhambhani
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AdminLogin() {
+export default function UserLogin() {
   const classes = useStyles();
 
   const history = useHistory();
@@ -62,7 +62,7 @@ export default function AdminLogin() {
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({ value: false, msg: "" });
 
-  const [{ user, admin, adminData }, dispatch] = useStateValue();
+  const [{ user, adminData }, dispatch] = useStateValue();
 
   const login = (event) => {
     event.preventDefault();
@@ -73,36 +73,16 @@ export default function AdminLogin() {
         setAlert({ value: false, msg: "" });
         if (adminData.value && adminData.data && adminData.data != null) {
           const res = db
-            .collection("admin")
+            .collection("users")
             .doc(result.user.uid)
-            .set(adminData.data)
-            .then(
-              dispatch({
-                type: actionTypes.SET_ADMIN,
-                admin: result.user,
-              })
-            )
+            .add(adminData.data)
             .catch((error) => setAlert({ value: true, msg: error.message }));
-        } else {
-          db.collection("admin")
-            .doc(result.user.uid)
-            .get()
-            .then((doc) => {
-              if (doc.exists) {
-                dispatch({
-                  type: actionTypes.SET_ADMIN,
-                  admin: result.user,
-                });
-                dispatch({
-                  type: actionTypes.SET_ADMIN_INFO,
-                  adminInfo: { value: true, data: doc.data() },
-                });
-              } else {
-                // alert("Invalid credentials");
-                console.log("invalid credentials");
-              }
-            });
         }
+        dispatch({
+          type: actionTypes.SET_USER,
+          user: result.user,
+        });
+
         setLoading(true);
         setTimeout(() => {
           setLoading(false);
@@ -122,7 +102,7 @@ export default function AdminLogin() {
         >
           <CircularProgress />
         </div>
-      ) : !admin ? (
+      ) : !user ? (
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           {alert.value ? <Alert severity="error"> {alert.msg} </Alert> : <></>}
