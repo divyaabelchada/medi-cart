@@ -121,7 +121,22 @@ function Cart() {
             })
             .then(() => {
               setStep(3);
-              setProducts([]);
+              db.collection("users")
+                .doc(user.uid)
+                .collection("cart")
+                .onSnapshot((snapshot) => {
+                  snapshot.docs.forEach((doc) => {
+                    db.collection("users")
+                      .doc(user.uid)
+                      .collection("cart")
+                      .doc(doc.id)
+                      .delete()
+                      .catch((error) => {
+                        console.log(error);
+                      });
+                  });
+                });
+              //setProducts([]);
             })
             .catch((error) => {
               setAlert({ value: false, msg: error });
