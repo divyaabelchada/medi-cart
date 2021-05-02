@@ -13,6 +13,7 @@ import firebase from "firebase";
 import { actionTypes } from "../../reducer";
 import { useStateValue } from "../../StateProvider";
 import { Grid, TextField } from "@material-ui/core";
+import { Link, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -32,9 +33,37 @@ export default function ImgMediaCard({
 }) {
   const classes = useStyles();
 
+  const history = useHistory();
   const [{ user }, dispatch] = useStateValue();
 
   const [qty, setQty] = useState(1);
+
+  const buyNow = () => {
+    if (user) {
+      db.collection("users")
+        .doc(user.uid)
+        .collection("cart")
+        .add({
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          description: description,
+          imageUrl: imageUrl,
+          productName: productName,
+          price: price,
+          category: category,
+          id: id,
+          qty: qty,
+        })
+        .then(() => {
+          alert("Product Added Successfully!");
+          history.push("/cart");
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    } else {
+      alert("Please login to continue");
+    }
+  };
 
   const addToCart = () => {
     if (user) {
@@ -119,7 +148,13 @@ export default function ImgMediaCard({
         >
           Add to cart
         </Button>
-        <Button fullWidth size="small" color="primary" variant="contained">
+        <Button
+          onClick={(e) => buyNow()}
+          fullWidth
+          size="small"
+          color="primary"
+          variant="contained"
+        >
           Buy now
         </Button>
       </CardActions>

@@ -1,4 +1,12 @@
-import { Button, Container, Grid, Paper, TextField } from "@material-ui/core";
+import {
+  Button,
+  Container,
+  Grid,
+  Icon,
+  IconButton,
+  Paper,
+  TextField,
+} from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -6,6 +14,7 @@ import { db, auth, provider } from "../../firebase";
 import { actionTypes } from "../../reducer";
 import { useStateValue } from "../../StateProvider";
 import firebase from "firebase";
+import { CheckCircleTwoTone, Delete } from "@material-ui/icons";
 
 function Cart() {
   const [{ user }, dispatch] = useStateValue();
@@ -112,11 +121,45 @@ function Cart() {
             })
             .then(() => {
               setStep(3);
-              setProducts([]);
+              db.collection("users")
+                .doc(user.uid)
+                .collection("cart")
+                .onSnapshot((snapshot) => {
+                  snapshot.docs.forEach((doc) => {
+                    db.collection("users")
+                      .doc(user.uid)
+                      .collection("cart")
+                      .doc(doc.id)
+                      .delete()
+                      .catch((error) => {
+                        console.log(error);
+                      });
+                  });
+                });
+              //setProducts([]);
             })
             .catch((error) => {
               setAlert({ value: false, msg: error });
             });
+        })
+        .catch((error) => {
+          setAlert({ value: false, msg: error });
+        });
+    } else {
+      setAlert({ value: true, msg: "Please login to continue" });
+    }
+  };
+
+  const deleteItem = (doc, price) => {
+    if (user) {
+      db.collection("users")
+        .doc(user.uid)
+        .collection("cart")
+        .doc(doc)
+        .delete()
+        .then(() => {
+          setTotal(total - Number(price));
+          alert("item deleted");
         })
         .catch((error) => {
           setAlert({ value: false, msg: error });
@@ -185,13 +228,20 @@ function Cart() {
                             <b>₹ {product.price} </b>
                           </p>
                         </Grid>
+                        <Grid item xs={1}>
+                          <IconButton
+                            onClick={() => deleteItem(id, product.price)}
+                          >
+                            <Delete />
+                          </IconButton>
+                        </Grid>
                       </Grid>
                       <br />
                       <hr style={{ borderTop: "1px solid #f7f7f7" }} />
                     </div>
                   ))}
                 </div>
-              )}{" "}
+              )}
             </Paper>
           </Grid>
           <Grid item xs={4}>
@@ -344,12 +394,8 @@ function Cart() {
               ) : (
                 <Grid container alignItems="flex-start" justify="center">
                   <Grid item xs={5}>
-                    <img
-                      src="https://lh3.googleusercontent.com/proxy/RhKmxLzEfBNPCvc0RdK9tZ8lFaNqfJWEo71lJCo3sBXQXyF0Y60QmRmaY6X1fYpG1AwzYVIsCM20YUouc9Jed0nBypjaRxDbPyHakuSiY0vPehPju-AJ-y2w7SCyL1ycLw"
-                      style={{
-                        objectFit: "contain",
-                        width: "100%",
-                      }}
+                    <CheckCircleTwoTone
+                      style={{ fontSize: "5rem", color: "green" }}
                     />
                   </Grid>
                   <Grid
