@@ -22,7 +22,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" to="/">
-        Naveen Bambhani
+        Naveen Bhambhani
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+export default function UserSignUp() {
   const classes = useStyles();
   const history = useHistory();
   const [{ user, adminData }, dispatch] = useStateValue();
@@ -98,16 +98,13 @@ export default function SignUp() {
         adminData: {
           value: true,
           data: {
-            username: username,
             lName: lName,
             fName: fName,
             contact: contact,
-            registrationNumber: aadhar,
-            admin: admin,
           },
         },
       });
-      history.push("/admin-login");
+      history.push("/user-login");
     }
   };
 
@@ -160,45 +157,15 @@ export default function SignUp() {
                   <Grid item xs={12}>
                     <TextField
                       variant="outlined"
-                      label="Company name"
-                      name="username"
-                      autoComplete="username"
-                      required
-                      fullWidth
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      variant="outlined"
                       label="Contact"
                       name="username"
-                      autoComplete="username"
+                      autoComplete="contact"
                       required
                       fullWidth
                       value={contact}
                       onChange={(e) => setContact(e.target.value)}
                     />
                   </Grid>
-                  {admin ? (
-                    <Grid item xs={12}>
-                      <TextField
-                        autoComplete="aadhar"
-                        name="firstName"
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="firstName"
-                        label="Registration Number"
-                        value={aadhar}
-                        onChange={(e) => setAadhar(e.target.value)}
-                        autoFocus
-                      />
-                    </Grid>
-                  ) : (
-                    <></>
-                  )}
                 </Grid>
                 <Button
                   type="submit"
@@ -213,7 +180,9 @@ export default function SignUp() {
 
                 <Grid container justify="flex-center">
                   <Grid item>
-                    <Link to={`/`}>Already have an account? Login</Link>
+                    <Link to={`/user-login`}>
+                      Already have an account? Login
+                    </Link>
                   </Grid>
                 </Grid>
               </form>
@@ -253,17 +222,6 @@ export default function SignUp() {
                     />
                   </Grid>
                 </Grid>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      value="admin"
-                      checked={admin}
-                      onChange={(e) => setAdmin(!admin)}
-                      color="primary"
-                    />
-                  }
-                  label="Register as Admin"
-                />
                 <Button
                   type="submit"
                   fullWidth
@@ -277,7 +235,9 @@ export default function SignUp() {
 
                 <Grid container justify="flex-center">
                   <Grid item>
-                    <Link to={`/`}>Already have an account? Login</Link>
+                    <Link to={`/user-login`}>
+                      Already have an account? Login
+                    </Link>
                   </Grid>
                 </Grid>
               </form>

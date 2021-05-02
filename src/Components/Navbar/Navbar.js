@@ -183,7 +183,7 @@ function Navbar() {
 
             <Grid item>
               {!user ? (
-                <NavLink to="/login" activeClassName="selected">
+                <NavLink to="/user-login" activeClassName="selected">
                   <h3>Login</h3>
                 </NavLink>
               ) : (
