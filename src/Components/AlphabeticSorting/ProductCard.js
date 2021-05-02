@@ -95,15 +95,17 @@ export default function ImgMediaCard({
     <Card className={classes.root}>
       <CardActionArea>
         {/*  <Skeleton variant="rect" widht={"100%"} height={200} /> */}
-        <img
-          src={imageUrl}
-          style={{
-            height: 200,
-            width: "90%",
-            objectFit: "contain",
-            paddingTop: "1rem",
-          }}
-        />
+        <Link to={`/product/${id}`}>
+          <img
+            src={imageUrl}
+            style={{
+              height: 200,
+              width: "90%",
+              objectFit: "contain",
+              paddingTop: "1rem",
+            }}
+          />
+        </Link>
         <CardContent>
           <Typography
             gutterBottom

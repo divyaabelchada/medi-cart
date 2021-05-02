@@ -27,6 +27,7 @@ import CategoryProducts from "./Components/AlphabeticSorting/CategoryProducts";
 import Profile from "./Components/Pages/Profile";
 import UserLogin from "./Components/UserLogin/UserLogin";
 import UserSignUp from "./Components/UserLogin/UserSignUp";
+import Product from "./Components/Pages/Product";
 
 export const colorTheme = createMuiTheme({
   palette: {
@@ -90,6 +91,9 @@ function App() {
                   <Profile />
                 </div>
               )}
+            </Route>
+            <Route path="/product/:productId">
+              <Product />
             </Route>
             <Route path="/cart">
               <Cart />
