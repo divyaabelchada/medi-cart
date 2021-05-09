@@ -17,7 +17,7 @@ import firebase from "firebase";
 import { CheckCircleTwoTone, Delete } from "@material-ui/icons";
 
 function Cart() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, userInfo }, dispatch] = useStateValue();
 
   const [step, setStep] = useState(1);
   const [products, setProducts] = useState([]);
@@ -108,6 +108,7 @@ function Cart() {
           products: products,
           amount: total,
           address: formData,
+          username: userInfo.fName +" "+ userInfo.lName
         })
         .then(() => {
           db.collection("users")
@@ -121,22 +122,7 @@ function Cart() {
             })
             .then(() => {
               setStep(3);
-              db.collection("users")
-                .doc(user.uid)
-                .collection("cart")
-                .onSnapshot((snapshot) => {
-                  snapshot.docs.forEach((doc) => {
-                    db.collection("users")
-                      .doc(user.uid)
-                      .collection("cart")
-                      .doc(doc.id)
-                      .delete()
-                      .catch((error) => {
-                        console.log(error);
-                      });
-                  });
-                });
-              //setProducts([]);
+              setProducts([]);
             })
             .catch((error) => {
               setAlert({ value: false, msg: error });

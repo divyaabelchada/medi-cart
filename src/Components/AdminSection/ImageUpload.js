@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   root: {
-    margin: 20,
     maxWidth: 600,
     textAlign: "left",
   },

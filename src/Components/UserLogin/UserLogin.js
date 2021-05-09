@@ -78,10 +78,41 @@ export default function UserLogin() {
             .set(adminData.data)
             .catch((error) => setAlert({ value: true, msg: error.message }));
         }
-        dispatch({
-          type: actionTypes.SET_USER,
-          user: result.user,
+        db.collection("users")
+        .doc(result.user.uid)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            dispatch({
+              type: actionTypes.SET_ADMIN,
+              admin: null,
+            });
+            dispatch({
+              type: actionTypes.SET_USER,
+              user: result.user,
+            });
+            dispatch({
+              type: actionTypes.SET_USER_INFO,
+              userInfo: doc.data(),
+            });
+            setLoading(true);
+            setTimeout(() => {
+              setLoading(false);
+              history.push("/user-profile");
+            }, 2000);
+          } else {
+            // doc.data() will be undefined in this case
+            setAlert({
+              value: true,
+              msg: "Unable to find your account, Please sign up to continue",
+            });
+          }
+        })
+        .catch((error) => {
+          //console.log("Error getting document:", error);
+          setAlert({ value: true, msg: "Error getting document" });
         });
+   
 
         setLoading(true);
         setTimeout(() => {

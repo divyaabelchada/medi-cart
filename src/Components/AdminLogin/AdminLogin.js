@@ -90,6 +90,10 @@ export default function AdminLogin() {
             .then((doc) => {
               if (doc.exists) {
                 dispatch({
+                  type: actionTypes.SET_USER,
+                  user: null,
+                });
+                dispatch({
                   type: actionTypes.SET_ADMIN,
                   admin: result.user,
                 });
