@@ -54,7 +54,7 @@ function AdminDashboard() {
                 <></>
               )}
             </Card>
-        <Card elevation={2} style={{ padding: "2rem", margin: "2rem" }}>
+        <Card elevation={2} style={{margin: "2rem" }}>
         <ImageUpload />
         </Card>
            
