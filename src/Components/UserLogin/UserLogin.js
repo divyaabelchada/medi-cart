@@ -75,7 +75,7 @@ export default function UserLogin() {
           const res = db
             .collection("users")
             .doc(result.user.uid)
-            .add(adminData.data)
+            .set(adminData.data)
             .catch((error) => setAlert({ value: true, msg: error.message }));
         }
         dispatch({
@@ -158,7 +158,7 @@ export default function UserLogin() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link to="/admin-signup" variant="body2">
+                  <Link to="/user-signup" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

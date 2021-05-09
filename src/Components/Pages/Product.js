@@ -30,7 +30,7 @@ function Product() {
       .catch((error) => {
         console.log("Error getting document:", error);
       });
-  }, []);
+  }, [productId]);
 
   const addToCart = () => {
     if (user) {

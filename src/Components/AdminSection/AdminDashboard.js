@@ -32,9 +32,12 @@ function AdminDashboard() {
               )}
             </Paper>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={5}>
             <ImageUpload />
           </Grid>{" "}
+          <Grid item xs={7}>
+            test
+            </Grid >
         </Grid>
       )}
     </div>

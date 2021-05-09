@@ -28,6 +28,7 @@ import Profile from "./Components/Pages/Profile";
 import UserLogin from "./Components/UserLogin/UserLogin";
 import UserSignUp from "./Components/UserLogin/UserSignUp";
 import Product from "./Components/Pages/Product";
+import Aboutus from "./Components/Pages/Aboutus";
 
 export const colorTheme = createMuiTheme({
   palette: {
@@ -63,9 +64,17 @@ function App() {
                 <NavLink to="/admin-login">
                   {" "}
                   {!admin ? <p> Vendor Login</p> : <p> AdminDashboard </p>}{" "}
+
                 </NavLink>
               </Grid>
-              <Grid item>About us</Grid>
+              <Grid item>
+              {!admin ? <p> </p> : <p onClick={()=>{window.location.href = "/"}} style={{cursor:"pointer"}}> Logout</p>}{" "}
+              </Grid>
+              <Grid item>
+                <NavLink to="/aboutus">
+                 About us
+                </NavLink>
+              </Grid>
               <Grid item>Contact us</Grid>
             </Grid>
           </div>
@@ -100,6 +109,9 @@ function App() {
             </Route>
             <Route path="/medicines-page/:category">
               <CategoryProducts />
+            </Route>
+            <Route path="/aboutus">
+             <Aboutus />
             </Route>
             <Route path="/medicines-page">
               <AlphabetCard />
