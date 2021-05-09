@@ -158,6 +158,15 @@ function Navbar() {
                 </NavLink>
               )}
             </Grid>
+            <Grid item>
+              {!user ? (
+               <></>
+              ) : (
+                <NavLink to="/profile" activeClassName="selected">
+                  <h3 onClick={()=>{window.location.href = "/"} } style={{cursor:"pointer"}}>Logout</h3>
+                </NavLink>
+              )}
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

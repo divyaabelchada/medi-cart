@@ -213,7 +213,9 @@ export default function SignUp() {
 
                 <Grid container justify="flex-center">
                   <Grid item>
-                    <Link to={`/`}>Already have an account? Login</Link>
+                    <Link to="/admin-login">
+                      {"Already have an account? Login"}
+                      </Link>
                   </Grid>
                 </Grid>
               </form>
@@ -277,7 +279,7 @@ export default function SignUp() {
 
                 <Grid container justify="flex-center">
                   <Grid item>
-                    <Link to={`/`}>Already have an account? Login</Link>
+                    <Link to={"/admin-login"}>Already have an account? Login</Link>
                   </Grid>
                 </Grid>
               </form>

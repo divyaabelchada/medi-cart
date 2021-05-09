@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   root: {
-    margin: 20,
     maxWidth: 600,
     textAlign: "left",
   },
@@ -76,8 +75,6 @@ function ImageUpload() {
       setImage(e.target.files[0]);
     }
   };
-
-  console.log(user);
 
   const handleUpload = () => {
     if (admin) {
