@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ImageUpload() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, admin }, dispatch] = useStateValue();
 
   const classes = useStyles();
 
@@ -80,7 +80,7 @@ function ImageUpload() {
   console.log(user);
 
   const handleUpload = () => {
-    if (user) {
+    if (admin) {
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
       uploadTask.on(
         "state_changed",
@@ -111,7 +111,7 @@ function ImageUpload() {
                   productName: productName,
                   price: productPrice,
                   category: category,
-                  seller: user.uid,
+                  seller: admin.uid,
                 })
                 .catch((error) => alert(error.message));
               //post image inside db
